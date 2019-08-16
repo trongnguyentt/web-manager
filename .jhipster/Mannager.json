@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "spentMoney",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "spentContent",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20190812175350",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "mannager",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

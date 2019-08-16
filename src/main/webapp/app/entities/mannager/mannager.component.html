@@ -1,0 +1,87 @@
+<div>
+    <h2>
+        <span>Quản lý</span>
+        <button class="btn btn-primary float-right jh-create-entity create-mannager" [routerLink]="['/', { outlets: { popup: ['mannager-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Tạo mới
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <form class="form" role="form" (ngSubmit)="sort()">
+    <div class="table-responsive" *ngIf="mannagers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="spentMoney"><span>Tiền chi tiêu</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="spentContent"><span>Nội dung chi tiêu</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdBy"><span>Người tạo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="createdDate"><span>Thời gian tạo</span> <span class="fa fa-sort"></span></th>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <th jhiSortBy="status"><span>Trạng thái</span> <span class="fa fa-sort"></span></th>
+                </li>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let mannager of mannagers ;trackBy: trackId">
+                <td><a [routerLink]="['../mannager', mannager.id ]">{{mannager.id}}</a></td>
+                <td>{{mannager.spentMoney}}</td>
+                <td>{{mannager.spentContent}}</td>
+                <td>{{mannager.createdBy}}</td>
+                <td>{{mannager.createdDate | date:'medium'}}</td>
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <td>{{mannager.status}}</td>
+                </li>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../mannager', mannager.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">Xem</span>
+                        </button>
+                        <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'mannager/'+ mannager.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Sửa</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'mannager/'+ mannager.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Xóa</span>
+                        </button>
+                        </li>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="row justify-content-center">
+        <button type="submit" class="btn btn-primary">Tính tiền</button>
+        </div>
+    </div>
+    </form>
+   </div>
+<br>
+<br>
+        <div *ngIf="mannagers && mannagers.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+

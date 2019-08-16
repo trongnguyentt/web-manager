@@ -1,0 +1,41 @@
+
+<div *ngIf="mannager">
+    <h2><span>Quản Lý chi tiêu</span> {{mannager.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Tiền chi tiêu</span></dt>
+        <dd>
+            <span>{{mannager.spentMoney}}</span>
+        </dd>
+        <dt><span>Nội dung chi tiêu</span></dt>
+        <dd>
+            <span>{{mannager.spentContent}}</span>
+        </dd>
+        <dt><span>Tạo bởi</span></dt>
+        <dd>
+            <span>{{mannager.createdBy}}</span>
+        </dd>
+        <dt><span>Ngày Tạo</span></dt>
+        <dd>
+            <span>{{mannager.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Trạng thái</span></dt>
+        <dd>
+            <span>{{mannager.status}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'mannager/'+ mannager.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
