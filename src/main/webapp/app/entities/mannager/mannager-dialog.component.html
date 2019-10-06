@@ -15,19 +15,13 @@
         <div class="form-group">
             <label class="form-control-label" for="field_spentMoney">Tiền chi tiêu</label>
             <input type="text" class="form-control" name="spentMoney" id="field_spentMoney"
-                [(ngModel)]="mannager.spentMoney"  />
+                [(ngModel)]="mannager.spentMoney"  /><span>(Đơn vị được nhập theo hàng nghìn)</span>
         </div>
         <div class="form-group">
             <label class="form-control-label" for="field_spentContent">Nội dung chi tiêu</label>
             <input type="text" class="form-control" name="spentContent" id="field_spentContent"
                 [(ngModel)]="mannager.spentContent"  />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_status">Status</label>
-            <input type="number" class="form-control" name="status" id="field_status"
-                [(ngModel)]="mannager.status"  />
-        </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

@@ -12,7 +12,7 @@ public class MannagerDTO implements Serializable {
 
     private Long id;
 
-    private String spentMoney;
+    private Long spentMoney;
 
     private String spentContent;
 
@@ -22,6 +22,8 @@ public class MannagerDTO implements Serializable {
 
     private Integer status;
 
+    private Long count;
+
     public Long getId() {
         return id;
     }
@@ -30,11 +32,11 @@ public class MannagerDTO implements Serializable {
         this.id = id;
     }
 
-    public String getSpentMoney() {
+    public Long getSpentMoney() {
         return spentMoney;
     }
 
-    public void setSpentMoney(String spentMoney) {
+    public void setSpentMoney(Long spentMoney) {
         this.spentMoney = spentMoney;
     }
 
@@ -68,6 +70,12 @@ public class MannagerDTO implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public  Long getCount(){ return count;   }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 
     @Override

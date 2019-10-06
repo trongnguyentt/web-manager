@@ -4,13 +4,19 @@
     </div>
     <div class="col-md-9">
         <h1 class="display-4"></h1>
-        <p class="lead"><strong></strong></p>
+       <!-- <p class="lead"><strong>ccc</strong></p>-->
 
         <div [ngSwitch]="isAuthenticated() ">
             <div class="alert alert-success" *ngSwitchCase="true">
-                <span *ngIf="account"
-                   > Bạn đã đăng nhập với tài khoản "{{account.login}}". </span>
+                <span *ngIf="account"> Bạn đã đăng nhập với tài khoản "{{account.login}}". </span>
             </div>
+        </div>
+        <!--<canvas width="400" height="400" id="game"></canvas>-->
+        <div class="game">
+            <canvas width="1000" height="408" id="game"></canvas>
+        </div>
+    </div>
+</div>
 
           <!--  <div class="alert alert-light" *ngSwitchCase="false">
                 <div class="modal-header">
@@ -56,6 +62,4 @@
                 </div>
 
             </div>-->
-</div>
-    </div>
-</div>
+

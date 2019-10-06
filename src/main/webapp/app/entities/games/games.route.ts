@@ -4,14 +4,13 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes, CanActiva
 import { UserRouteAccessService } from '../../shared';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
-import { MannagerComponent } from './mannager.component';
-import { MannagerDetailComponent } from './mannager-detail.component';
-import { MannagerPopupComponent } from './mannager-dialog.component';
-import { MannagerDeletePopupComponent } from './mannager-delete-dialog.component';
-import {MannagerCountPopupComponent} from "./mannager-count.component";
+import { GamesComponent } from './games.component';
+import { GamesDetailComponent } from './games-detail.component';
+import { GamesPopupComponent } from './games-dialog.component';
+import { GamesDeletePopupComponent } from './games-delete-dialog.component';
 
 @Injectable()
-export class MannagerResolvePagingParams implements Resolve<any> {
+export class GamesResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -26,66 +25,56 @@ export class MannagerResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const mannagerRoute: Routes = [
+export const gamesRoute: Routes = [
     {
-        path: 'mannager',
-        component: MannagerComponent,
+        path: 'gamexx',
+        component: GamesComponent,
         resolve: {
-            'pagingParams': MannagerResolvePagingParams
+            'pagingParams': GamesResolvePagingParams
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Mannagers'
+            pageTitle: 'Games'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'mannager/:id',
-        component: MannagerDetailComponent,
+        path: 'games/:id',
+        component: GamesDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Mannagers'
+            pageTitle: 'Games'
         },
         canActivate: [UserRouteAccessService]
     }
 ];
 
-export const mannagerPopupRoute: Routes = [
+export const gamesPopupRoute: Routes = [
     {
-        path: 'mannager-new',
-        component: MannagerPopupComponent,
+        path: 'games-new',
+        component: GamesPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Mannagers'
+            pageTitle: 'Games'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'mannager/:id/edit',
-        component: MannagerPopupComponent,
+        path: 'games/:id/edit',
+        component: GamesPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Mannagers'
+            pageTitle: 'Games'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'mannager/:id/delete',
-        component: MannagerDeletePopupComponent,
-        data: {
-            authorities: ['ROLE_ADMIN'],
-            pageTitle: 'Mannagers'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    },
-    {
-        path: 'mannager-count',
-        component: MannagerCountPopupComponent,
+        path: 'games/:id/delete',
+        component: GamesDeletePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Mannagers'
+            pageTitle: 'Games'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

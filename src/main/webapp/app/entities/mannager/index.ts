@@ -6,3 +6,6 @@ export * from './mannager-delete-dialog.component';
 export * from './mannager-detail.component';
 export * from './mannager.component';
 export * from './mannager.route';
+export * from './mannager-count.component';
+
+

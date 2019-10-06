@@ -8,6 +8,7 @@ export class Mannager implements BaseEntity {
         public createdBy?: string,
         public createdDate?: any,
         public status?: number,
+        public count?: number,
     ) {
     }
 }

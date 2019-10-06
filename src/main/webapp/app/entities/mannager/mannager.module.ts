@@ -14,6 +14,8 @@ import {
     mannagerRoute,
     mannagerPopupRoute,
     MannagerResolvePagingParams,
+    MannagerCountComponent,
+    MannagerCountPopupComponent,
 } from './';
 
 const ENTITY_STATES = [
@@ -33,6 +35,8 @@ const ENTITY_STATES = [
         MannagerDeleteDialogComponent,
         MannagerPopupComponent,
         MannagerDeletePopupComponent,
+        MannagerCountPopupComponent,
+        MannagerCountComponent,
     ],
     entryComponents: [
         MannagerComponent,
@@ -40,6 +44,8 @@ const ENTITY_STATES = [
         MannagerPopupComponent,
         MannagerDeleteDialogComponent,
         MannagerDeletePopupComponent,
+        MannagerCountComponent,
+        MannagerCountPopupComponent,
     ],
     providers: [
         MannagerService,

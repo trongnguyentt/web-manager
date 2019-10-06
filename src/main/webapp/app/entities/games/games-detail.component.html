@@ -1,0 +1,37 @@
+
+<div *ngIf="games">
+    <h2><span>Games</span> {{games.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Ten Tai Khoan</span></dt>
+        <dd>
+            <span>{{games.tenTaiKhoan}}</span>
+        </dd>
+        <dt><span>Thoi Gian Tao</span></dt>
+        <dd>
+            <span>{{games.thoiGianTao | date:'medium'}}</span>
+        </dd>
+        <dt><span>Thoi Gian Truy Cap Cuoi</span></dt>
+        <dd>
+            <span>{{games.thoiGianTruyCapCuoi | date:'medium'}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{games.status}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'games/'+ games.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -960,6 +960,12 @@
                     <artifactId>simpleclient_dropwizard</artifactId>
                     <version>${prometheus-simpleclient.version}</version>
                 </dependency>
+                <dependency>
+                    <groupId>com.cosium.spring.data</groupId>
+                    <artifactId>spring-data-jpa-entity-graph</artifactId>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <version>${spring-data-jpa-entity-graph.version}</version>
+                </dependency>
             </dependencies>
         </profile>
         <profile>

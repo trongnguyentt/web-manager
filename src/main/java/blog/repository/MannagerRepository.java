@@ -1,6 +1,7 @@
 package blog.repository;
 
 import blog.domain.Mannager;
+import blog.repository.customer.MannagerRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -11,6 +12,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MannagerRepository extends JpaRepository<Mannager, Long> {
+public interface MannagerRepository extends JpaRepository<Mannager, Long>, MannagerRepositoryCustom {
 
 }

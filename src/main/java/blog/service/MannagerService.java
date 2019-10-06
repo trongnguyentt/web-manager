@@ -1,8 +1,10 @@
 package blog.service;
 
 import blog.service.dto.MannagerDTO;
+import io.swagger.models.parameters.QueryParameter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.MultiValueMap;
 
 /**
  * Service Interface for managing Mannager.
@@ -23,7 +25,7 @@ public interface MannagerService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<MannagerDTO> findAll(Pageable pageable);
+    Page<MannagerDTO> findAll(Pageable pageable, MultiValueMap<String,String> multiValueMap);
 
     /**
      *  Get the "id" mannager.
@@ -38,5 +40,7 @@ public interface MannagerService {
      *
      *  @param id the id of the entity
      */
-    void delete(Long id);
+    MannagerDTO delete(Long id,Integer status);
+
+    MannagerDTO count();
 }

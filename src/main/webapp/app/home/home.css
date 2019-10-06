@@ -9,6 +9,15 @@ Main page styles
     background: url("../../content/images/wepx.png") no-repeat center top;
     background-size: contain;
 }
+.game{
+    height: 100%;
+    margin: 0;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ff1213;
+}
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media

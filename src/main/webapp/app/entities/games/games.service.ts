@@ -5,34 +5,33 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { JhiDateUtils } from 'ng-jhipster';
 
-import { Mannager } from './mannager.model';
+import { Games } from './games.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class MannagerService {
+export class GamesService {
 
-    private resourceUrl = SERVER_API_URL + 'api/mannagers';
-    private resourceUrl2= SERVER_API_URL + 'api/x';
-    private resourceUrl3= SERVER_API_URL + 'api/count';
+    private resourceUrl = SERVER_API_URL + 'api/games';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
-    create(mannager: Mannager): Observable<Mannager> {
-        const copy = this.convert(mannager);
+    create(games: Games): Observable<Games> {
+        const copy = this.convert(games);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
     }
 
-    update(mannager: Mannager): Observable<Mannager> {
-        const copy = this.convert(mannager);
+    update(games: Games): Observable<Games> {
+        const copy = this.convert(games);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
     }
-    find(id: number): Observable<Mannager> {
+
+    find(id: number): Observable<Games> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
@@ -46,14 +45,9 @@ export class MannagerService {
     }
 
     delete(id: number): Observable<Response> {
-        return this.http.delete(`${this.resourceUrl2}/${id}`);
+        return this.http.delete(`${this.resourceUrl}/${id}`);
     }
-    count(): Observable<Mannager> {
-        return this.http.get(`${this.resourceUrl3}`).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
-    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -64,22 +58,26 @@ export class MannagerService {
     }
 
     /**
-     * Convert a returned JSON object to Mannager.
+     * Convert a returned JSON object to Games.
      */
-    private convertItemFromServer(json: any): Mannager {
-        const entity: Mannager = Object.assign(new Mannager(), json);
-        entity.createdDate = this.dateUtils
-            .convertDateTimeFromServer(json.createdDate);
+    private convertItemFromServer(json: any): Games {
+        const entity: Games = Object.assign(new Games(), json);
+        entity.thoiGianTao = this.dateUtils
+            .convertDateTimeFromServer(json.thoiGianTao);
+        entity.thoiGianTruyCapCuoi = this.dateUtils
+            .convertDateTimeFromServer(json.thoiGianTruyCapCuoi);
         return entity;
     }
 
     /**
-     * Convert a Mannager to a JSON which can be sent to the server.
+     * Convert a Games to a JSON which can be sent to the server.
      */
-    private convert(mannager: Mannager): Mannager {
-        const copy: Mannager = Object.assign({}, mannager);
+    private convert(games: Games): Games {
+        const copy: Games = Object.assign({}, games);
 
-        copy.createdDate = this.dateUtils.toDate(mannager.createdDate);
+        copy.thoiGianTao = this.dateUtils.toDate(games.thoiGianTao);
+
+        copy.thoiGianTruyCapCuoi = this.dateUtils.toDate(games.thoiGianTruyCapCuoi);
         return copy;
     }
 }

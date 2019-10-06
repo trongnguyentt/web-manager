@@ -1,0 +1,22 @@
+<form name="editForm" role="form" >
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+
+    <div class="modal-header">
+        <h2 class="modal-title" id="myMannagerLabel">Số tiền bạn nợ admin là </h2>
+<br></div>
+        <div class="row justify-content-center" *ngIf="mannager">
+            <h4><span><b>{{mannager.spentMoney}} nghìn đồng </b></span></h4>
+        </div>
+
+    <br>
+    <div class="row justify-content-center">
+        <button type="button" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()" class="btn btn-primary" >
+            <span class="fa fa-pencil"></span>
+            <span class="d-none d-md-inline">Đồng ý</span>
+        </button>
+    </div>
+<br>
+
+</form>

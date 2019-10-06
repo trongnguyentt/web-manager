@@ -1,4 +1,6 @@
-package blog.web.rest;
+/*
+ blog.web.rest;
+
 
 import blog.WebBlogApp;
 
@@ -38,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @see MannagerResource
  */
+/*
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WebBlogApp.class)
 public class MannagerResourceIntTest {
@@ -98,7 +101,7 @@ public class MannagerResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static Mannager createEntity(EntityManager em) {
+  /*  public static Mannager createEntity(EntityManager em) {
         Mannager mannager = new Mannager()
             .spentMoney(DEFAULT_SPENT_MONEY)
             .spentContent(DEFAULT_SPENT_CONTENT)
@@ -303,3 +306,4 @@ public class MannagerResourceIntTest {
         assertThat(mannagerMapper.fromId(null)).isNull();
     }
 }
+*/

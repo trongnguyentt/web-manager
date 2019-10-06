@@ -1,6 +1,5 @@
 package blog.domain;
 
-import io.swagger.models.auth.In;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -10,12 +9,12 @@ import java.time.Instant;
 import java.util.Objects;
 
 /**
- * A Mannager.
+ * A Games.
  */
 @Entity
-@Table(name = "mannager")
+@Table(name = "games")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Mannager extends AbstractAuditingEntity2 implements Serializable  {
+public class Games implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,11 +22,14 @@ public class Mannager extends AbstractAuditingEntity2 implements Serializable  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "spent_money")
-    private Long spentMoney;
+    @Column(name = "ten_tai_khoan")
+    private String tenTaiKhoan;
 
-    @Column(name = "spent_content")
-    private String spentContent;
+    @Column(name = "thoi_gian_tao")
+    private Instant thoiGianTao;
+
+    @Column(name = "thoi_gian_truy_cap_cuoi")
+    private Instant thoiGianTruyCapCuoi;
 
     @Column(name = "status")
     private Integer status;
@@ -41,38 +43,50 @@ public class Mannager extends AbstractAuditingEntity2 implements Serializable  {
         this.id = id;
     }
 
-    public Long getSpentMoney() {
-        return spentMoney;
+    public String getTenTaiKhoan() {
+        return tenTaiKhoan;
     }
 
-    public Mannager spentMoney(Long spentMoney) {
-        this.spentMoney = spentMoney;
+    public Games tenTaiKhoan(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
         return this;
     }
 
-    public void setSpentMoney(Long spentMoney) {
-        this.spentMoney = spentMoney;
+    public void setTenTaiKhoan(String tenTaiKhoan) {
+        this.tenTaiKhoan = tenTaiKhoan;
     }
 
-    public String getSpentContent() {
-        return spentContent;
+    public Instant getThoiGianTao() {
+        return thoiGianTao;
     }
 
-    public Mannager spentContent(String spentContent) {
-        this.spentContent = spentContent;
+    public Games thoiGianTao(Instant thoiGianTao) {
+        this.thoiGianTao = thoiGianTao;
         return this;
     }
 
-    public void setSpentContent(String spentContent) {
-        this.spentContent = spentContent;
+    public void setThoiGianTao(Instant thoiGianTao) {
+        this.thoiGianTao = thoiGianTao;
     }
 
+    public Instant getThoiGianTruyCapCuoi() {
+        return thoiGianTruyCapCuoi;
+    }
+
+    public Games thoiGianTruyCapCuoi(Instant thoiGianTruyCapCuoi) {
+        this.thoiGianTruyCapCuoi = thoiGianTruyCapCuoi;
+        return this;
+    }
+
+    public void setThoiGianTruyCapCuoi(Instant thoiGianTruyCapCuoi) {
+        this.thoiGianTruyCapCuoi = thoiGianTruyCapCuoi;
+    }
 
     public Integer getStatus() {
         return status;
     }
 
-    public Mannager status(Integer status) {
+    public Games status(Integer status) {
         this.status = status;
         return this;
     }
@@ -90,11 +104,11 @@ public class Mannager extends AbstractAuditingEntity2 implements Serializable  {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Mannager mannager = (Mannager) o;
-        if (mannager.getId() == null || getId() == null) {
+        Games games = (Games) o;
+        if (games.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), mannager.getId());
+        return Objects.equals(getId(), games.getId());
     }
 
     @Override
@@ -104,12 +118,11 @@ public class Mannager extends AbstractAuditingEntity2 implements Serializable  {
 
     @Override
     public String toString() {
-        return "Mannager{" +
+        return "Games{" +
             "id=" + getId() +
-            ", spentMoney='" + getSpentMoney() + "'" +
-            ", spentContent='" + getSpentContent() + "'" +
-            ", createdBy='" + getCreatedBy() + "'" +
-            ", createdDate='" + getCreatedDate() + "'" +
+            ", tenTaiKhoan='" + getTenTaiKhoan() + "'" +
+            ", thoiGianTao='" + getThoiGianTao() + "'" +
+            ", thoiGianTruyCapCuoi='" + getThoiGianTruyCapCuoi() + "'" +
             ", status='" + getStatus() + "'" +
             "}";
     }

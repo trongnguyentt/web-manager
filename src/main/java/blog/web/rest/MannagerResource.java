@@ -1,5 +1,6 @@
 package blog.web.rest;
 
+import blog.service.util.Constants;
 import com.codahale.metrics.annotation.Timed;
 import blog.service.MannagerService;
 import blog.web.rest.util.HeaderUtil;
@@ -7,6 +8,7 @@ import blog.web.rest.util.PaginationUtil;
 import blog.service.dto.MannagerDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.models.parameters.QueryParameter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -89,10 +92,12 @@ public class MannagerResource {
      */
     @GetMapping("/mannagers")
     @Timed
-    public ResponseEntity<List<MannagerDTO>> getAllMannagers(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<MannagerDTO>> getAllMannagers(Pageable pageable, @RequestParam  MultiValueMap<String,String> multiValueMap) {
         log.debug("REST request to get a page of Mannagers");
-        Page<MannagerDTO> page = mannagerService.findAll(pageable);
+        Page<MannagerDTO> page = mannagerService.findAll(pageable,multiValueMap);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/mannagers");
+
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
@@ -116,11 +121,18 @@ public class MannagerResource {
      * @param id the id of the mannagerDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/mannagers/{id}")
+    @DeleteMapping("/x/{id}")
     @Timed
-    public ResponseEntity<Void> deleteMannager(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteMannager(@PathVariable Long id,MannagerDTO mannagerDTO) {
         log.debug("REST request to delete Mannager : {}", id);
-        mannagerService.delete(id);
+        mannagerService.delete(id, Constants.ENTITY_STATUS.STATUS_DELETED);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    @GetMapping("/count")
+    @Timed
+    public ResponseEntity<MannagerDTO> doCount() {
+        log.debug("REST request to get Mannager : {}");
+        MannagerDTO mannagerDTO = mannagerService.count();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(mannagerDTO));
     }
 }

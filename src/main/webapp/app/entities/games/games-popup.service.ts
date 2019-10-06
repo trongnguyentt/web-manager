@@ -2,19 +2,18 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DatePipe } from '@angular/common';
-import { Mannager } from './mannager.model';
-import { MannagerService } from './mannager.service';
-
+import { Games } from './games.model';
+import { GamesService } from './games.service';
 
 @Injectable()
-export class MannagerPopupService {
+export class GamesPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
         private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
-        private mannagerService: MannagerService
+        private gamesService: GamesService
 
     ) {
         this.ngbModalRef = null;
@@ -28,25 +27,27 @@ export class MannagerPopupService {
             }
 
             if (id) {
-                this.mannagerService.find(id).subscribe((mannager) => {
-                    mannager.createdDate = this.datePipe
-                        .transform(mannager.createdDate, 'yyyy-MM-ddTHH:mm:ss');
-                    this.ngbModalRef = this.mannagerModalRef(component, mannager);
+                this.gamesService.find(id).subscribe((games) => {
+                    games.thoiGianTao = this.datePipe
+                        .transform(games.thoiGianTao, 'yyyy-MM-ddTHH:mm:ss');
+                    games.thoiGianTruyCapCuoi = this.datePipe
+                        .transform(games.thoiGianTruyCapCuoi, 'yyyy-MM-ddTHH:mm:ss');
+                    this.ngbModalRef = this.gamesModalRef(component, games);
                     resolve(this.ngbModalRef);
                 });
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
-                    this.ngbModalRef = this.mannagerModalRef(component, new Mannager());
+                    this.ngbModalRef = this.gamesModalRef(component, new Games());
                     resolve(this.ngbModalRef);
                 }, 0);
             }
         });
     }
 
-    mannagerModalRef(component: Component, mannager: Mannager): NgbModalRef {
+    gamesModalRef(component: Component, games: Games): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
-        modalRef.componentInstance.mannager = mannager;
+        modalRef.componentInstance.games = games;
         modalRef.result.then((result) => {
             this.router.navigate([{ outlets: { popup: null }}], { replaceUrl: true });
             this.ngbModalRef = null;

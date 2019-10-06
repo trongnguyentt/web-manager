@@ -5,12 +5,18 @@ import blog.domain.Mannager;
 import blog.repository.MannagerRepository;
 import blog.service.dto.MannagerDTO;
 import blog.service.mapper.MannagerMapper;
+import blog.service.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
+
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -40,6 +46,7 @@ public class MannagerServiceImpl implements MannagerService{
     @Override
     public MannagerDTO save(MannagerDTO mannagerDTO) {
         log.debug("Request to save Mannager : {}", mannagerDTO);
+        mannagerDTO.setStatus(Constants.ENTITY_STATUS.STATUS_ACTIVE);
         Mannager mannager = mannagerMapper.toEntity(mannagerDTO);
         mannager = mannagerRepository.save(mannager);
         return mannagerMapper.toDto(mannager);
@@ -53,12 +60,17 @@ public class MannagerServiceImpl implements MannagerService{
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<MannagerDTO> findAll(Pageable pageable) {
+    public Page<MannagerDTO> findAll(Pageable pageable, MultiValueMap<String,String> multiValueMap) {
         log.debug("Request to get all Mannagers");
-        return mannagerRepository.findAll(pageable)
-            .map(mannagerMapper::toDto);
+        List<Mannager> mannagerList=mannagerRepository.search(pageable,multiValueMap);
+        Page<Mannager> pages = new PageImpl<>(mannagerList, pageable, mannagerRepository.countMannager(multiValueMap));
+        return pages.map(mannagerMapper::toDto);
     }
-
+    @Override
+    public MannagerDTO count() {
+       MannagerDTO mannagerDTO=mannagerRepository.doC();
+        return mannagerDTO;
+    }
     /**
      *  Get one mannager by id.
      *
@@ -79,8 +91,17 @@ public class MannagerServiceImpl implements MannagerService{
      *  @param id the id of the entity
      */
     @Override
-    public void delete(Long id) {
-        log.debug("Request to delete Mannager : {}", id);
-        mannagerRepository.delete(id);
+    public MannagerDTO delete(Long id,Integer status) {
+        Mannager mannager = mannagerRepository.findOne(id);
+
+            if (!Constants.ENTITY_STATUS.STATUS_DELETED.equals(mannager.getStatus())) {
+                mannager.setStatus(status);
+                mannagerRepository.save(mannager);
+                return mannagerMapper.toDto(mannager);
+            }
+
+        return null;
     }
+
+
 }

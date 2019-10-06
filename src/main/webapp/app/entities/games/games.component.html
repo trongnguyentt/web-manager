@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span>Games</span>
+        <button class="btn btn-primary float-right jh-create-entity create-games" [routerLink]="['/', { outlets: { popup: ['games-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Games
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="games">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tenTaiKhoan"><span>Ten Tai Khoan</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="thoiGianTao"><span>Thoi Gian Tao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="thoiGianTruyCapCuoi"><span>Thoi Gian Truy Cap Cuoi</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let games of games ;trackBy: trackId">
+                <td><a [routerLink]="['../games', games.id ]">{{games.id}}</a></td>
+                <td>{{games.tenTaiKhoan}}</td>
+                <td>{{games.thoiGianTao | date:'medium'}}</td>
+                <td>{{games.thoiGianTruyCapCuoi | date:'medium'}}</td>
+                <td>{{games.status}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../games', games.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'games/'+ games.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'games/'+ games.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="games && games.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>
